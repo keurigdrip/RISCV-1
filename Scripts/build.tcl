@@ -1,6 +1,6 @@
 #Define target part and create output directory
 set partNum xc7z020clg400-1
-set outputDir {C:\Users\ashwi\Documents\Vivado_Projects\RISCV-1\build}
+set outputDir {../build}
 file mkdir $outputDir
 set files [glob -nocomplain "$outputDir/*"]
 if {[llength $files] != 0} {
@@ -13,8 +13,8 @@ if {[llength $files] != 0} {
 
 #Reference HDL and constraint source files
 # read_vhdl -library usrDefLib [ glob path/to/vhdl/sources/*.vhdl ]
-read_verilog [ glob C:/Users/ashwi/Documents/Vivado_Projects/RISCV-1/RTL/*.v ]
-read_xdc C:/Users/ashwi/Documents/Vivado_Projects/RISCV-1/Constraints/Arty-Z7-20-Master.xdc
+read_verilog [ glob ../RTL/*.v ]
+read_xdc ../Constraints/Arty-Z7-20-Master.xdc
 
 #Run Synthesis
 synth_design -top top -part $partNum
@@ -33,13 +33,13 @@ if {[get_property SLACK [get_timing_paths -max_paths 1 -nworst 1 -setup]] < 0} {
  phys_opt_design
 }
 write_checkpoint -force $outputDir/Implementation.runs/post_place.dcp
-report_utilization -file $outputDir/Implementation.runs//post_place_util.rpt
+report_utilization -file $outputDir/Implementation.runs/post_place_util.rpt
 report_timing_summary -file $outputDir/Implementation.runs/post_place_timing_summary.rpt
 
 #Route design and generate bitstream
 route_design -directive Explore
 write_checkpoint -force $outputDir/Implementation.runs/post_route.dcp
-report_route_status -file $outputDir/Implementation.runs//post_route_status.rpt
+report_route_status -file $outputDir/Implementation.runs/post_route_status.rpt
 report_timing_summary -file $outputDir/Implementation.runs/post_route_timing_summary.rpt
 report_power -file $outputDir/Implementation.runs/post_route_power.rpt
 report_drc -file $outputDir/Implementation.runs/post_imp_drc.rpt
