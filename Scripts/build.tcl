@@ -1,6 +1,7 @@
 #Define target part and create output directory
 set partNum xc7z020clg400-1
-set outputDir {../build}
+set projectDir [pwd]
+set outputDir $projectDir/build
 file mkdir $outputDir
 set files [glob -nocomplain "$outputDir/*"]
 if {[llength $files] != 0} {
@@ -13,8 +14,8 @@ if {[llength $files] != 0} {
 
 #Reference HDL and constraint source files
 # read_vhdl -library usrDefLib [ glob path/to/vhdl/sources/*.vhdl ]
-read_verilog [ glob ../RTL/*.v ]
-read_xdc ../Constraints/Arty-Z7-20-Master.xdc
+read_verilog [glob $projectDir/RTL/*.v]
+read_xdc $projectDir/Constraints/Arty-Z7-20-Master.xdc
 
 #Run Synthesis
 synth_design -top top -part $partNum
@@ -25,7 +26,7 @@ report_utilization -file $outputDir/Synthesis.runs/post_synth_util.rpt
 #run optimization
 opt_design
 place_design
-report_clock_utilization -file $outputDir/Implementation.runs/clock_util.rpt
+report_clock_utilization
 
 #get timing violations and run optimizations if needed
 if {[get_property SLACK [get_timing_paths -max_paths 1 -nworst 1 -setup]] < 0} {
