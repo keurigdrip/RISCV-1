@@ -1,5 +1,5 @@
-# RISCV on FPGA
-Goal of this project is to implement a riscv soft-core and explore various other architectures .
+# RISC-V on FPGA
+Goal of this project is to implement a risc-v soft-core and explore various architectures.
 
 ## Requirements
 
@@ -8,10 +8,10 @@ Goal of this project is to implement a riscv soft-core and explore various other
 
 ## Building
 
-We are using vivado's non-project workflow for this project
+We are using Vivado's non-project workflow
 
 - Open powershell in the project directory
-- Make sure you have path to vivado execuatble in your environmental variables
-- Inorder to run vivada in tcl mode run the following command: `vivado -mode tcl`
+- Make sure you have path to Vivado executable in your environmental variables
+- In order to run Vivado in tcl mode run the following command: `vivado -mode tcl`
 - Again make sure you are in project directory 
-- execute the build script: `source Scripts/build.tcl`
+- execute the build script from tcl shell: `source Scripts/build.tcl`
